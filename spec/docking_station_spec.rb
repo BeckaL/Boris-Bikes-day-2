@@ -30,9 +30,18 @@ describe DockingStation do
 
   it 'does not dock bike when rack is full' do
     ds = DockingStation.new
-    ds.DEFAULT_CAPACITY.times { ds.dock(Bike.new) }
+    ds.CAPACITY.times { ds.dock(Bike.new) }
     expect { ds.dock(Bike.new) }.to raise_error 'Rack full'
   end
 
+  it 'set custom capacity for docking station' do
+    ds = DockingStation.new(1)
+    expect(ds.CAPACITY).to eq 1
+  end
+
+  it 'no capacity specified, default capacity is 20' do
+    ds = DockingStation.new
+    expect(ds.CAPACITY).to eq 20
+  end
 
 end

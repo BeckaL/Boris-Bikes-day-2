@@ -1,17 +1,18 @@
 require_relative 'bike'
+require 'pry'
 
 class DockingStation
-  attr_reader  :rack, :DEFAULT_CAPACITY
+  attr_reader  :rack, :CAPACITY
 
-  def initialize
+  def initialize(capacity = 20)
     @rack = []
-    @DEFAULT_CAPACITY = 20
+    @CAPACITY = capacity
 
   end
 
   def release_bike
     fail 'There are no bikes available at this station' unless !(@rack.empty?)
-    Bike.new
+    @rack.pop
   end
 
   def dock(bike)
@@ -21,7 +22,7 @@ class DockingStation
 
 private
 def full?
-  @rack.length >= @DEFAULT_CAPACITY ? true : false
+  @rack.length >= @CAPACITY ? true : false
 end
 
 end
