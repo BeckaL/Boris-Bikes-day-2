@@ -16,7 +16,7 @@ class DockingStation
   end
 
   def dock(bike)
-    fail 'Rack full' unless rack.length == 0
+    fail 'Rack full' unless rack.length < 20
     @rack.push(bike)
   end
 end
