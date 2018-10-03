@@ -8,15 +8,18 @@ class DockingStation
   end
 
   def release_bike
-    if @rack.length == 0
-      raise 'There are no bikes available at this station'
-    else
-      Bike.new
-    end
+    fail 'There are no bikes available at this station' unless !(@rack.empty?)
+    Bike.new
   end
 
   def dock(bike)
-    fail 'Rack full' unless rack.length < 20
+    fail 'Rack full' unless !full?
     @rack.push(bike)
   end
+
+private
+def full?
+  @rack.length >= 20 ? true : false
+end
+
 end
