@@ -20,9 +20,16 @@ describe DockingStation do
     expect(bike.working?).to eq true
   end
 
-  it 'docks bike' do
+  it 'docks working bike' do
     ds = DockingStation.new
     bike = Bike.new
+    ds.dock(bike)
+    expect(ds.rack.length).to eq 1
+  end
+
+  it 'docks broken bike' do
+    ds = DockingStation.new
+    bike = Bike.new(false)
     ds.dock(bike)
     expect(ds.rack.length).to eq 1
   end
