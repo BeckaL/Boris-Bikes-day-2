@@ -21,6 +21,7 @@ class DockingStation
   def dock(bike)
     fail 'Rack full' unless !full?
     @rack.push(bike)
+    return 'Broken bike has been reported' if !(bike.working?) 
   end
 
 private

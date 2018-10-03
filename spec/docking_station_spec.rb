@@ -59,4 +59,10 @@ describe DockingStation do
     expect(ds.release_bike.working?).to eq true
   end
 
+  it 'reports a broken bike when returned to docking station' do
+    ds = DockingStation.new
+    broken_bike = Bike.new(false)
+    expect(ds.dock(broken_bike)).to eq 'Broken bike has been reported'
+  end
+
 end
