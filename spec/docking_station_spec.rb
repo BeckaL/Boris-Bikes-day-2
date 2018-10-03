@@ -30,7 +30,7 @@ describe DockingStation do
 
   it 'does not dock bike when rack is full' do
     ds = DockingStation.new
-    20.times { ds.dock(Bike.new) }
+    ds.DEFAULT_CAPACITY.times { ds.dock(Bike.new) }
     expect { ds.dock(Bike.new) }.to raise_error 'Rack full'
   end
 
