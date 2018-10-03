@@ -25,5 +25,13 @@ describe DockingStation do
     expect(ds.dock(bike)).to eq true
   end
 
+  it 'does not dock bike when rack is full' do
+    ds = DockingStation.new
+    bike = Bike.new
+    ds.dock(bike)
+    second_bike = Bike.new
+    expect { ds.dock(second_bike) }.to raise_error
+  end
+
 
 end
