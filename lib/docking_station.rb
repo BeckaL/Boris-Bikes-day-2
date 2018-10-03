@@ -12,7 +12,10 @@ class DockingStation
 
   def release_bike
     fail 'There are no bikes available at this station' unless !(@rack.empty?)
-    @rack.pop
+    working_bikes = @rack.map.select { |bike| bike.working? }
+    fail 'No working bikes available' unless !(working_bikes.empty?)
+    # Need to remember to come back to this to fix for multiple bikes
+    working_bikes.pop
   end
 
   def dock(bike)

@@ -10,7 +10,6 @@ describe DockingStation do
 
   it 'does not release a bike if the rack is empty' do
     ds = DockingStation.new
-    # binding.pry
     expect { ds.release_bike }.to raise_error 'There are no bikes available at this station'
   end
 
@@ -42,6 +41,22 @@ describe DockingStation do
   it 'no capacity specified, default capacity is 20' do
     ds = DockingStation.new
     expect(ds.CAPACITY).to eq 20
+  end
+
+  it 'does not release a broken bike' do
+    ds = DockingStation.new
+    broken_bike = Bike.new(false)
+    ds.dock(broken_bike)
+    expect { ds.release_bike }.to raise_error 'No working bikes available'
+  end
+
+  it 'releases bike when working and non working bike both in dock' do
+    ds = DockingStation.new
+    working_bike = Bike.new
+    broken_bike = Bike.new(false)
+    ds.dock(broken_bike)
+    ds.dock(working_bike)
+    expect(ds.release_bike.working?).to eq true
   end
 
 end
